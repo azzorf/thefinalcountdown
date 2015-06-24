@@ -32,11 +32,7 @@ public class Cliente extends Pessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "cadastro", nullable = true)
     private Calendar cadastro;
-
-    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @OrderBy(value = "nome asc")
-    private List<Animal> animais = new ArrayList<>();
-    
+   
     public Cliente() {
     }
 
@@ -54,16 +50,6 @@ public class Cliente extends Pessoa implements Serializable {
 
     public void setCadastro(Calendar cadastro) {
         this.cadastro = cadastro;
-    }
-
-    public List<Animal> getAnimais() {
-        return animais;
-    }
-
-    public void setAnimais(List<Animal> animais) {
-        this.animais = animais;
-    }
-    
-    
+    }   
 
 }

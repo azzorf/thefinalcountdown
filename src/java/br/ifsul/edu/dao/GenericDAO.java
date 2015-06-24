@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-
 /**
  *
  * @author Jorge Luis Boeira Bavaresco jlbavaresco@gmail.com
@@ -19,7 +18,7 @@ import javax.persistence.PersistenceContext;
 public class GenericDAO<T> implements Serializable {
 
     private Class persistentClass;
-    @PersistenceContext(unitName = "TA_Financeiro6M1PU")
+    @PersistenceContext(unitName = "finalPU")
     private EntityManager em;
     private String filter = "";
     private String customFilter;
@@ -33,7 +32,7 @@ public class GenericDAO<T> implements Serializable {
     private List<T> listObjects;
 
     public GenericDAO() {
-        
+
     }
 
     public void persist(T object) throws Exception {
@@ -41,7 +40,7 @@ public class GenericDAO<T> implements Serializable {
     }
 
     public void merge(T objeto) throws Exception {
-           em.merge(objeto);
+        em.merge(objeto);
     }
 
     public void remove(T objeto) throws Exception {
@@ -55,13 +54,13 @@ public class GenericDAO<T> implements Serializable {
      * @param id - Identificados do objeto Long
      * @return Objeto do banco
      */
-    public T getObjectById(Integer id) throws Exception{
-            return (T) em.find(persistentClass, id);
+    public T getObjectById(Integer id) throws Exception {
+        return (T) em.find(persistentClass, id);
     }
-    
+
     public void refresh(T object) throws Exception {
         em.refresh(object);
-    }    
+    }
 
     public List<T> listObjects() {
         StringBuilder ejbql = new StringBuilder("from ");
@@ -124,7 +123,7 @@ public class GenericDAO<T> implements Serializable {
             maxObjects = totalObjects;
         }
         // se o resultado não é maior que uma pagina coloca a navegação na primeira pagina novamente
-        if (totalObjects <= maxObjects){
+        if (totalObjects <= maxObjects) {
             position = 0;
         }
         //retorna uma consulta paginada   

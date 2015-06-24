@@ -1,8 +1,8 @@
 package br.ifsul.edu.controle;
 
-import br.edu.ifsul.modelo.Cidade;
-import br.ifsul.edu.dao.CidadeDAO;
+import br.edu.ifsul.modelo.Item;
 import br.ifsul.edu.dao.GenericDAO;
+import br.ifsul.edu.dao.ItemDAO;
 import br.ifsul.edu.util.Util;
 
 import java.io.Serializable;
@@ -10,31 +10,31 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name = "controleCidade")
+@ManagedBean(name = "controleItem")
 @ViewScoped
-public class ControleCidade implements Serializable {
+public class ControleItem implements Serializable {
 
     @EJB
-    private CidadeDAO<Cidade> dao;
-    private Cidade objeto;
+    private ItemDAO<Item> dao;
+    private Item objeto;
 
     public GenericDAO getDao() {
         return dao;
     }
 
-    public void setDao(CidadeDAO dao) {
+    public void setDao(ItemDAO dao) {
         this.dao = dao;
     }
 
-    public ControleCidade() {
+    public ControleItem() {
     }
 
     public String listar() {
-        return "/cidade/listar?faces-redirect=true";
+        return "/item/listar?faces-redirect=true";
     }
 
     public void novo() {
-        objeto = new Cidade();
+        objeto = new Item();
     }
 
     public void salvar() {
@@ -69,11 +69,11 @@ public class ControleCidade implements Serializable {
         }
     }
 
-    public Cidade getObjeto() {
+    public Item getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Cidade objeto) {
+    public void setObjeto(Item objeto) {
         this.objeto = objeto;
     }
 

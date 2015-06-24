@@ -1,21 +1,15 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -50,11 +44,7 @@ public class Animal implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "nascimento", nullable = true)
     private Calendar nascimento;
-    
-    @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @OrderBy(value = "consulta asc")
-    private List<Consulta> consultas = new ArrayList<>();
-    
+     
     @ManyToOne
     @JoinColumn(name = "cliente", referencedColumnName = "id", nullable = false)
     @NotNull(message = "Um Cliente deve ser informado.")
@@ -66,7 +56,7 @@ public class Animal implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.getId());
         return hash;
     }
 
@@ -127,13 +117,6 @@ public class Animal implements Serializable {
         this.nascimento = nascimento;
     }
 
-    public List<Consulta> getConsultas() {
-        return consultas;
-    }
-
-    public void setConsultas(List<Consulta> consultas) {
-        this.consultas = consultas;
-    }
 
     public Cliente getCliente() {
         return cliente;

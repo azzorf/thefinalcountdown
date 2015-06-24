@@ -5,6 +5,7 @@
  */
 
 import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.Veterinario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,12 +18,12 @@ import org.junit.Test;
  *
  * @author Azzorf
  */
-public class TesteCidade {
+public class TesteVeterinario {
 
     EntityManagerFactory emf;
     EntityManager em;
 
-    public TesteCidade() {
+    public TesteVeterinario() {
     }
 
     @Before
@@ -41,9 +42,18 @@ public class TesteCidade {
     public void testar() {
         boolean exception = false;
         try {
-            Cidade obj = new Cidade();
-            obj.setNome("Passo Fundo");
-            obj.setUf("RS");
+            Veterinario obj = new Veterinario();
+            obj.setNome("Iago Frozza");
+            obj.setAtivo(true);
+            obj.setCargaHoraria(60.0);
+            obj.setCrmv(859183512);
+            obj.setRg(1098596934);
+            obj.setEmail("azzorf@gmail.com");
+            obj.setEndereco("Rua Capitão Eleutério, 1477");
+            obj.setTelefone("5499274219");
+            obj.setPassword("swordfish");
+            obj.setEspecialidade("Caninos");
+            obj.setCidade(em.find(Cidade.class, 1));
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

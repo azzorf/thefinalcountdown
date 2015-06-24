@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 
+import br.edu.ifsul.modelo.Animal;
 import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.Consulta;
+import br.edu.ifsul.modelo.Veterinario;
+import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,12 +21,12 @@ import org.junit.Test;
  *
  * @author Azzorf
  */
-public class TesteCidade {
+public class TesteConsulta {
 
     EntityManagerFactory emf;
     EntityManager em;
 
-    public TesteCidade() {
+    public TesteConsulta() {
     }
 
     @Before
@@ -41,9 +45,12 @@ public class TesteCidade {
     public void testar() {
         boolean exception = false;
         try {
-            Cidade obj = new Cidade();
-            obj.setNome("Passo Fundo");
-            obj.setUf("RS");
+            Consulta obj = new Consulta();
+            obj.setVeterinario(em.find(Veterinario.class, 4));
+            obj.setValorTotal(1234.23);
+            obj.setDataPagamento(Calendar.getInstance());
+            obj.setDataConsulta(Calendar.getInstance());
+            obj.setAnimal(em.find(Animal.class, 4));
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

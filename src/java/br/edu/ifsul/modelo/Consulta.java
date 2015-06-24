@@ -5,17 +5,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,34 +36,30 @@ public class Consulta implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @NotNull(message = "O Consulta deve ser informado")
-    @Column(name = "consulta", nullable = false)
-    private Calendar consulta;
+    @Column(name = "dataConsulta", nullable = false)
+    private Calendar dataConsulta;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "pagamento", nullable = true)
-    private Calendar pagamento;
+    private Calendar dataPagamento;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @OrderBy(value = "dataAcesso asc")
-    private List<Item> itemConsulta = new ArrayList<>();
-    
-    @ManyToOne
-    @JoinColumn(name = "cliente", referencedColumnName = "id", nullable = false)
-    @NotNull(message = "Um Cliente deve ser informado.")
-    private Cliente cliente;
-    
+    @ManyToMany
+    @JoinTable(name = "itens_consultas", joinColumns
+            = @JoinColumn(name = "consulta", referencedColumnName = "id"),
+            inverseJoinColumns
+            = @JoinColumn(name = "item", referencedColumnName = "id"))
+    private List<Item> itens = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "veterinario", referencedColumnName = "id", nullable = false)
     @NotNull(message = "Um Veterinario deve ser informado.")
     private Veterinario veterinario;
-    
+
     @ManyToOne
     @JoinColumn(name = "animal", referencedColumnName = "id", nullable = false)
     @NotNull(message = "Um animal deve ser informado.")
     private Animal animal;
-    
-    
-        
+
     public Integer getId() {
         return id;
     }
@@ -80,22 +74,6 @@ public class Consulta implements Serializable {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
-    }
-
-    public Calendar getConsulta() {
-        return consulta;
-    }
-
-    public void setConsulta(Calendar consulta) {
-        this.consulta = consulta;
-    }
-
-    public Calendar getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Calendar pagamento) {
-        this.pagamento = pagamento;
     }
 
     @Override
@@ -123,22 +101,6 @@ public class Consulta implements Serializable {
     public Consulta() {
     }
 
-    public List<Item> getItemConsulta() {
-        return itemConsulta;
-    }
-
-    public void setItemConsulta(List<Item> itemConsulta) {
-        this.itemConsulta = itemConsulta;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public Veterinario getVeterinario() {
         return veterinario;
     }
@@ -154,7 +116,29 @@ public class Consulta implements Serializable {
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
-    
-    
+
+    public Calendar getDataConsulta() {
+        return dataConsulta;
+    }
+
+    public void setDataConsulta(Calendar dataConsulta) {
+        this.dataConsulta = dataConsulta;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
+
+    public Calendar getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Calendar dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
 
 }
