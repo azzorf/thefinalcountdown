@@ -49,7 +49,7 @@ public class ControleLogin implements Serializable {
                 Util.msgErro("Erro ao salvar o acesso do usuário: " + e.getMessage());
                 return "/index";
             }
-            Util.msgInformacao("USuario logado com sucesso!");
+            Util.msgInformacao("Usuario logado com sucesso!");
             return "/index";
         } else {
             Util.msgErro("Usuário ou senha inválidos!");

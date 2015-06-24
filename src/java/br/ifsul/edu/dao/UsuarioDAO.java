@@ -36,7 +36,7 @@ public class UsuarioDAO<T> extends GenericDAO<Veterinario> implements Serializab
     }
 
     public Boolean login(String usuario, String senha) {
-        Query query = super.getEm().createQuery("from Veterinario where upper(login) = :usuario and upper(senha) = :senha and ativo = true");
+        Query query = super.getEm().createQuery("from Veterinario where upper(email) = :usuario and upper(password) = :senha and ativo = true");
         query.setParameter("login", usuario.toUpperCase());
         query.setParameter("senha", senha.toUpperCase());
         if (!query.getResultList().isEmpty()) {
@@ -47,7 +47,7 @@ public class UsuarioDAO<T> extends GenericDAO<Veterinario> implements Serializab
     }
 
     public Veterinario localizarUsuarioPorNome(String usuario) {
-        Veterinario obj = (Veterinario) super.getEm().createQuery("from Veterinario where upper(login) = :usuario").
+        Veterinario obj = (Veterinario) super.getEm().createQuery("from Veterinario where upper(email) = :usuario").
                 setParameter("login", usuario.toUpperCase()).getSingleResult();
         return obj;
     }

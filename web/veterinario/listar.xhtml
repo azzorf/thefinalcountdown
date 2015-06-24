@@ -5,14 +5,14 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Cidade</title>
+        <title>Veterinario</title>
         <h:outputScript library="js" name="scripts.js"/> 
     </h:head>
     <h:body>
         <h:form id="formListagem">
             <p:messages/>
             <p:growl/>
-            <p:commandButton  actionListener="#{controleCidade.novo()}" oncomplete="PF('dlg').show();"
+            <p:commandButton  actionListener="#{controleItem.novo()}" oncomplete="PF('dlg').show();"
                               update=":formEdicao" icon="ui-icon-plus"/>
             <div align="center">
                 <p:panelGrid columns="1">
@@ -20,66 +20,74 @@
                         Filtro Ordenação e Paginação 
                     </f:facet>                          
                     <p:column  colspan="13" rowspan="1">     
-                        <p:commandButton actionListener="#{controleCidade.novo()}"
+                        <p:commandButton actionListener="#{controleItem.novo()}"
                                          value="Novo" oncomplete="PF('dlg').show();"
                                          update=":formEdicao" icon="ui-icon-plus"/>                                                        
                         <h:outputLabel for="ordem" value="Ordem" />     
                         <h:selectOneMenu id="ordem" 
-                                         value="#{controleCidade.dao.currentOrder}"
-                                         converter="#{controleCidade.dao.converterOrder}">
-                            <f:selectItems value="#{controleCidade.dao.listOrder}" />
+                                         value="#{controleItem.dao.currentOrder}"
+                                         converter="#{controleItem.dao.converterOrder}">
+                            <f:selectItems value="#{controleItem.dao.listOrder}" />
                             <p:ajax update="formListagem" 
-                                    listener="#{controleCidade.listar()}"/>
+                                    listener="#{controleItem.listar()}"/>
                         </h:selectOneMenu>                            
                         <h:outputLabel for="maximoObjetos" value="Máximo de objetos" />
                         <p:inputText id="maximoObjetos"  
-                                     value="#{controleCidade.dao.maxObjects}" size="2"
+                                     value="#{controleItem.dao.maxObjects}" size="2"
                                      onkeydown="Mascara(this, Integer);"
                                      onkeypress="Mascara(this, Integer);"
                                      onkeyup="Mascara(this, Integer);">
                             <p:ajax update="tabela"
-                                    listener="#{controleCidade.listar()}" event="keyup"/>                          
+                                    listener="#{controleItem.listar()}" event="keyup"/>                          
                         </p:inputText>                      
                         <h:outputLabel for="filtro" value="Filtro" />
                         <p:inputText id="filtro" placeholder="Digite o filtro"
-                                     value="#{controleCidade.dao.filter}" >
+                                     value="#{controleItem.dao.filter}" >
                             <p:ajax update="tabela" 
-                                    listener="#{controleCidade.listar()}" event="keyup"/>                            
+                                    listener="#{controleItem.listar()}" event="keyup"/>                            
                         </p:inputText>
                         <p:commandButton id="btnFiltrar" update="formListagem" 
-                                         actionListener="#{controleCidade.listar()}" icon="ui-icon-search" />  
+                                         actionListener="#{controleItem.listar()}" icon="ui-icon-search" />  
                         <p:commandButton id="btnPrimeiro" update="formListagem" 
-                                         actionListener="#{controleCidade.dao.first()}" icon="ui-icon-seek-start"/>  
+                                         actionListener="#{controleItem.dao.first()}" icon="ui-icon-seek-start"/>  
                         <p:commandButton id="btnAnterior" update="formListagem" 
-                                         actionListener="#{controleCidade.dao.previous()}" icon="ui-icon-seek-prev"/>  
+                                         actionListener="#{controleItem.dao.previous()}" icon="ui-icon-seek-prev"/>  
                         <p:commandButton  id="btnProximo" update="formListagem" 
-                                          actionListener="#{controleCidade.dao.next()}" icon="ui-icon-seek-next"/>  
+                                          actionListener="#{controleItem.dao.next()}" icon="ui-icon-seek-next"/>  
                         <p:commandButton id="btnUltimo" update="formListagem" 
-                                         actionListener="#{controleCidade.dao.last()}" icon="ui-icon-seek-end" /> 
+                                         actionListener="#{controleItem.dao.last()}" icon="ui-icon-seek-end" /> 
                     </p:column> 
                     <f:facet name="footer">  
-                        <h:outputLabel value="#{controleCidade.dao.navigationMessage}" />
+                        <h:outputLabel value="#{controleItem.dao.navigationMessage}" />
                     </f:facet>      
                 </p:panelGrid>                     
             </div>  
-            <p:dataTable value="#{controleCidade.dao.listObjects}" var="obj" emptyMessage="Nenhum dado encontrado" id="tabela">
+            <p:dataTable value="#{controleItem.dao.listObjects}" var="obj" emptyMessage="Nenhum dado encontrado" id="tabela">
                 <p:column headerText="ID">
                     <p:outputLabel value="#{obj.id}"/>
                 </p:column>
                 <p:column headerText="Nome">
                     <p:outputLabel value="#{obj.nome}"/>
                 </p:column>
-                <p:column headerText="UF">
-                    <p:outputLabel value="#{obj.uf}"/>
+                <p:column headerText="Descrição">
+                    <p:outputLabel value="#{obj.descricao}"/>
+                </p:column>
+                <p:column headerText="Estoque">
+                    <p:outputLabel value="#{obj.estoque}"/>
+                </p:column>
+                <p:column headerText="Preço">
+                    <p:outputLabel value="#{obj.preco}">
+                        <f:convertNumber pattern="R$ 0.00"/>
+                    </p:outputLabel>
                 </p:column>
                 <p:column headerText="Açoes">
                     <div align="center">
                         <p:commandButton update=":formEdicao" 
-                                         actionListener="#{controleCidade.editar(obj.id)}" 
+                                         actionListener="#{controleItem.editar(obj.id)}" 
                                          oncomplete="{PF('dlg').show();}"
                                          icon="ui-icon-pencil"/>
                         <p:commandButton update=":formListagem" 
-                                         actionListener="#{controleCidade.remover(obj.id)}" 
+                                         actionListener="#{controleItem.remover(obj.id)}" 
                                          onclick="if (!confirm('Confirma a exclusão do estado #{obj.nome}?'))
                                                      return false"
                                          icon="ui-icon-trash"/>
@@ -95,20 +103,28 @@
                     <f:facet name="footer">
                         <div align="center">
                             <p:commandButton value="Salvar" update=":formListagem :formEdicao" 
-                                             actionListener="#{controleCidade.salvar()}" 
+                                             actionListener="#{controleItem.salvar()}" 
                                              oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
                                              icon="ui-icon-disk"/>
 
                         </div>
                     </f:facet>
                     <p:outputLabel value="ID" for="txtId"/>
-                    <p:inputText value="#{controleCidade.objeto.id}" id="txtId" size="10" maxlength="10" readonly="true"/>
+                    <p:inputText value="#{controleItem.objeto.id}" id="txtId" size="10" maxlength="10" readonly="true"/>
 
                     <p:outputLabel value="Nome" for="txtNome"/>
-                    <p:inputText value="#{controleCidade.objeto.nome}" id="txtNome" size="50" maxlength="50"/>
+                    <p:inputText value="#{controleItem.objeto.nome}" id="txtNome" size="50" maxlength="50"/>
 
-                    <p:outputLabel value="UF" for="txtUF"/>
-                    <p:inputText value="#{controleCidade.objeto.uf}" id="txtUF" size="2" maxlength="2"/>
+                    <p:outputLabel value="Descrição" for="txtDescricao"/>
+                    <p:editor id="txtDescricao" 
+                              value="#{controleItem.objeto.descricao}" width="500" height="200" />
+
+                    <p:outputLabel value="Estoque" for="txtEstoque"/>
+                    <p:inputText value="#{controleItem.objeto.estoque}" id="txtEstoque" size="3" maxlength="3"/>
+
+                    <p:outputLabel value="Preço" for="txtPreco"/>
+                    <p:inputText value="#{controleItem.objeto.preco}" id="txtPreco" size="14" maxlength="14"/>
+
 
                 </p:panelGrid>
             </p:dialog>
