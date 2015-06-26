@@ -35,7 +35,7 @@ public class ControleCliente implements Serializable {
     }
 
     public String listar() {
-        return "/cliente/listar?faces-redirect=true";
+        return "/privado/cliente/listar?faces-redirect=true";
     }
 
     public void novo() {

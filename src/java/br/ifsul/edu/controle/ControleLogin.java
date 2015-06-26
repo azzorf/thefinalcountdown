@@ -7,7 +7,7 @@ package br.ifsul.edu.controle;
 
 import br.edu.ifsul.modelo.AcessoUsuario;
 import br.edu.ifsul.modelo.Veterinario;
-import br.ifsul.edu.dao.UsuarioDAO;
+import br.ifsul.edu.dao.VeterinarioDAO;
 import br.ifsul.edu.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class ControleLogin implements Serializable {
     @EJB
-    private UsuarioDAO<Veterinario> dao;
+    private VeterinarioDAO<Veterinario> dao;
     private Veterinario usuarioLogado;
     private String usuario;
     private String senha;
@@ -42,7 +42,7 @@ public class ControleLogin implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             AcessoUsuario acesso = new AcessoUsuario(request.getRemoteAddr());
-//            usuarioLogado.adicionarAcesso(acesso);
+            usuarioLogado.adicionarAcesso(acesso);
             try {
                 dao.merge(usuarioLogado);
             } catch (Exception e) {
@@ -57,11 +57,11 @@ public class ControleLogin implements Serializable {
         }
     }
 
-    public UsuarioDAO<Veterinario> getDao() {
+    public VeterinarioDAO<Veterinario> getDao() {
         return dao;
     }
 
-    public void setDao(UsuarioDAO<Veterinario> dao) {
+    public void setDao(VeterinarioDAO<Veterinario> dao) {
         this.dao = dao;
     }
 
@@ -88,4 +88,6 @@ public class ControleLogin implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+
 }

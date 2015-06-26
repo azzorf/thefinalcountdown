@@ -1,18 +1,20 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "veterinario")
 public class Veterinario extends Pessoa implements Serializable {
 
@@ -37,7 +39,10 @@ public class Veterinario extends Pessoa implements Serializable {
     @Length(max = 10, min = 6, message = "A senha deve ter {min} e {max} caracteres")
     @Column(name = "password", length = 10, nullable = false)
     private String password;
-    
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OrderBy(value = "id asc")
+    private List<AcessoUsuario> AcessoUsuario = new ArrayList<>();
 
     public Veterinario() {
     }
@@ -82,5 +87,16 @@ public class Veterinario extends Pessoa implements Serializable {
         this.password = password;
     }
 
+    public void adicionarAcesso(AcessoUsuario obj) {
+        AcessoUsuario.add(obj);
+    }
+
+    public List<AcessoUsuario> getAcessoUsuario() {
+        return AcessoUsuario;
+    }
+
+    public void setAcessoUsuario(List<AcessoUsuario> AcessoUsuario) {
+        this.AcessoUsuario = AcessoUsuario;
+    }
 
 }

@@ -35,7 +35,7 @@ public class ControleVeterinario implements Serializable {
     }
 
     public String listar() {
-        return "/veterinario/listar?faces-redirect=true";
+        return "/privado/veterinario/listar?faces-redirect=true";
     }
 
     public void novo() {

@@ -30,7 +30,7 @@ public class ControleItem implements Serializable {
     }
 
     public String listar() {
-        return "/item/listar?faces-redirect=true";
+        return "/privado/item/listar?faces-redirect=true";
     }
 
     public void novo() {
