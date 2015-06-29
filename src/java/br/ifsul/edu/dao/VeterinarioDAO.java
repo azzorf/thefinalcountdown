@@ -22,7 +22,7 @@ public class VeterinarioDAO<T> extends GenericDAO<Veterinario> implements Serial
         super.setPersistentClass(Veterinario.class);
         super.getListOrder().add(new Order("id", "ID", "="));
         super.getListOrder().add(new Order("nome", "Nome", "like"));
-        super.getListOrder().add(new Order("apelido", "Apelido", "like"));
+        super.getListOrder().add(new Order("crmv", "CRMV", "="));
         super.getListOrder().add(new Order("cidade.nome", "Cidade", "like"));
         super.setCurrentOrder(super.getListOrder().get(1));
         super.setFilter("");

@@ -24,6 +24,8 @@ public class ClienteDAO<T> extends GenericDAO<Cliente> implements Serializable {
             new Order("id", "ID", "="));
         super.getListOrder().add(
             new Order("nome", "Nome", "like"));        
+        super.getListOrder().add(
+            new Order("cpf", "CPF", "="));        
         // definir qual a ordenação padrão
         super.setCurrentOrder((Order) super.getListOrder().get(1));
         super.setFilter("");
