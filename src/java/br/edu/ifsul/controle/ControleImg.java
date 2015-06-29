@@ -1,4 +1,4 @@
-package br.ifsul.edu.controle;
+package br.edu.ifsul.controle;
 
 import java.util.ArrayList;
 import java.util.List;

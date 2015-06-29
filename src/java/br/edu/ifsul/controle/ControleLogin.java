@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifsul.edu.controle;
+package br.edu.ifsul.controle;
 
 import br.edu.ifsul.modelo.AcessoUsuario;
 import br.edu.ifsul.modelo.Veterinario;
-import br.ifsul.edu.dao.VeterinarioDAO;
-import br.ifsul.edu.util.Util;
+import br.edu.ifsul.dao.VeterinarioDAO;
+import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -68,6 +68,14 @@ public class ControleLogin implements Serializable {
     public Veterinario getUsuarioLogado() {
         return usuarioLogado;
     }
+    
+        public String efetuarLogOut(){
+        usuarioLogado = null;
+        Util.msgInformacao("Logout efetuado com sucesso!");
+        return "/index";
+    }
+    
+
 
     public void setUsuarioLogado(Veterinario usuarioLogado) {
         this.usuarioLogado = usuarioLogado;

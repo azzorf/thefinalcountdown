@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifsul.edu.filtros;
+package br.edu.ifsul.filtros;
 
 
-import br.ifsul.edu.controle.ControleLogin;
+import br.edu.ifsul.controle.ControleLogin;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

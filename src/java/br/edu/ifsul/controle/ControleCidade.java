@@ -1,40 +1,40 @@
-package br.ifsul.edu.controle;
+package br.edu.ifsul.controle;
 
-import br.edu.ifsul.modelo.Consulta;
-import br.ifsul.edu.dao.ConsultaDAO;
-import br.ifsul.edu.dao.GenericDAO;
-import br.ifsul.edu.util.Util;
+import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.dao.CidadeDAO;
+import br.edu.ifsul.dao.GenericDAO;
+import br.edu.ifsul.util.Util;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name = "controleConsulta")
+@ManagedBean(name = "controleCidade")
 @ViewScoped
-public class ControleConsulta implements Serializable {
+public class ControleCidade implements Serializable {
 
     @EJB
-    private ConsultaDAO<Consulta> dao;
-    private Consulta objeto;
+    private CidadeDAO<Cidade> dao;
+    private Cidade objeto;
 
     public GenericDAO getDao() {
         return dao;
     }
 
-    public void setDao(ConsultaDAO dao) {
+    public void setDao(CidadeDAO dao) {
         this.dao = dao;
     }
 
-    public ControleConsulta() {
+    public ControleCidade() {
     }
 
     public String listar() {
-        return "/privado/consulta/listar?faces-redirect=true";
+        return "/privado/cidade/listar?faces-redirect=true";
     }
 
     public void novo() {
-        objeto = new Consulta();
+        objeto = new Cidade();
     }
 
     public void salvar() {
@@ -69,11 +69,11 @@ public class ControleConsulta implements Serializable {
         }
     }
 
-    public Consulta getObjeto() {
+    public Cidade getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Consulta objeto) {
+    public void setObjeto(Cidade objeto) {
         this.objeto = objeto;
     }
 

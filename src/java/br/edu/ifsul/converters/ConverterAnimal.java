@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifsul.edu.converters;
+package br.edu.ifsul.converters;
 
 
-import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.Animal;
 import java.io.Serializable;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,8 +19,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author Azzorf
  */
-@FacesConverter(value = "converterCidade")
-public class ConverterCidade implements Serializable, Converter{
+@FacesConverter(value = "converterAnimal")
+public class ConverterAnimal implements Serializable, Converter{
     @PersistenceContext(unitName = "finalPU")
     private EntityManager em;
 
@@ -29,7 +29,7 @@ public class ConverterCidade implements Serializable, Converter{
             if(string == null || string.equals("Selecione um registro")){
                 return null;
             }
-            return em.find(Cidade.class, Integer.parseInt(string));
+            return em.find(Animal.class, Integer.parseInt(string));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ConverterCidade implements Serializable, Converter{
             if(o == null){
                 return null;
             }
-            Cidade obj = (Cidade) o;
+            Animal obj = (Animal) o;
             return obj.getId().toString();
     }
 

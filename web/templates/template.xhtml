@@ -13,6 +13,20 @@
         </h:head>
         <p:layout fullPage="true">
             <p:layoutUnit position="north" header="Sistema Financeiro com EJB" style="text-align: center" size="150">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <!--            <p:imageSwitch effect="fade" id="fadeEffect">
                                 <ui:repeat value="#{controleImg.images}" var="image" id="fadeEffectImages" >
                                     <p:graphicImage library="imagens" name="/slider/#{image}" id="image" />
@@ -20,8 +34,8 @@
                             </p:imageSwitch>-->
             </p:layoutUnit>
             <p:layoutUnit position="west" header="Menu" resizable="true" size="170">
-                <h:form id="menu">
-                    <p:menu>
+                <h:form id="menu" >
+                    <p:menu rendered="#{controleLogin.usuarioLogado != null}">
                         <p:menuitem value="Animal" action="#{controleAnimal.listar()}" ajax="false"/>
                         <p:menuitem value="Cidade" action="#{controleCidade.listar()}" ajax="false"/>
                         <p:menuitem value="Cliente" action="#{controleCliente.listar()}" ajax="false"/>
@@ -29,6 +43,16 @@
                         <p:menuitem value="Item" action="#{controleItem.listar()}" ajax="false"/>
                         <p:menuitem value="Veterinario" action="#{controleVeterinario.listar()}" ajax="false"/>
                     </p:menu>
+                </h:form>
+                              <h:form>
+                    <p:growl id="messages" showDetail="true"/>
+                    <p:menuButton value="Login" >
+                        <p:menuitem value="Login" action="#{controleLogin.paginaLogin()}"
+                                    ajax="false" />
+                        <p:menuitem value="Logout"
+                                    action="#{controleLogin.efetuarLogOut()}"
+                                    ajax="false"/>
+                    </p:menuButton>
                 </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="center">

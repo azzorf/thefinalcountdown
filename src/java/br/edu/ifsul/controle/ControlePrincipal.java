@@ -1,5 +1,5 @@
 
-package br.ifsul.edu.controle;
+package br.edu.ifsul.controle;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;

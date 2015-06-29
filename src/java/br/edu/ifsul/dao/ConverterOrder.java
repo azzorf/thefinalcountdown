@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifsul.edu.dao;
+package br.edu.ifsul.dao;
 
-import br.ifsul.edu.dao.Order;
+import br.edu.ifsul.dao.Order;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.component.UIComponent;

@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "consulta")
@@ -59,6 +61,11 @@ public class Consulta implements Serializable {
     @JoinColumn(name = "animal", referencedColumnName = "id", nullable = false)
     @NotNull(message = "Um animal deve ser informado.")
     private Animal animal;
+    
+    @NotEmpty(message = "A Descricao deve ser informado")
+    @Length(max = 500, min = 3, message = "A Descricao deve ter no minimo {min} e no maximo {max}  caracteres")
+    @Column(name = "descricao", nullable = true, length = 500, columnDefinition = "text")
+    private String descricao;
 
     public Integer getId() {
         return id;
@@ -129,8 +136,14 @@ public class Consulta implements Serializable {
         return itens;
     }
 
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
+     public void addItem(Item obj){
+        if (!this.getItens().contains(obj)){
+            this.getItens().add(obj);
+        }
+    }
+    
+    public void removeItem(Item obj){
+        this.getItens().remove(obj);
     }
 
     public Calendar getDataPagamento() {
@@ -141,4 +154,15 @@ public class Consulta implements Serializable {
         this.dataPagamento = dataPagamento;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
 }

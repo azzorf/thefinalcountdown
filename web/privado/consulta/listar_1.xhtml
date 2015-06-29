@@ -136,48 +136,75 @@
 
                                 <p:outputLabel value="Valor Total" for="txtValor"/>
                                 <p:inputText value="#{controleConsulta.objeto.valorTotal}" id="txtValor" size="10" maxlength="10" readonly="true"/>
+
+
+
+                                <!--                    <p:outputLabel value="Endereço" for="txtEndereco"/>
+                                                    <p:inputText value="#{controleConsulta.objeto.endereco}" id="txtEndereco" size="50" maxlength="50"/>
+                                
+                                                    <p:outputLabel value="E-Mail" for="txtEmail"/>
+                                                    <p:inputText value="#{controleConsulta.objeto.email}" id="txtEmail" size="50" maxlength="50"/>
+                                
+                                                    <p:outputLabel value="RG" for="txtRG"/>
+                                                    <p:inputMask id="txtRG" value="#{controleConsulta.objeto.rg}" mask="9999999999"/>
+                                
+                                                    <p:outputLabel value="Telefone" for="txtTelefone"/>
+                                                    <p:inputMask id="txtTelefone" value="#{controleConsulta.objeto.telefone}" mask="(99)9999-9999"/>
+                                
+                                                    <p:outputLabel value="CRMV" for="txtCRMV"/>
+                                                    <p:inputText value="#{controleConsulta.objeto.crmv}" id="txtCRMV" size="5" maxlength="5"/>
+                                
+                                                    <p:outputLabel value="Especialidade" for="txtEspecialidade"/>
+                                                    <p:inputText value="#{controleConsulta.objeto.especialidade}" id="txtEspecialidade" size="50" maxlength="50"/>
+                                
+                                                    <p:outputLabel value="Senha" for="txtPassword"/>
+                                                    <p:password value="#{controleConsulta.objeto.password}" id="txtPassword" redisplay="true" feedback="true"/>
+                                                    
+                                                    <p:outputLabel value="Ativo" for="txtAtivo"/>
+                                                    <p:selectBooleanCheckbox value="#{controleConsulta.objeto.ativo}" id="txtAtivo"/>-->
+
+
                             </p:panelGrid>
                         </p:tab>
-
-<!--                        <p:tab title="Itens" titletip="Itens">
-                            <div align="center">
-                                <p:panelGrid columns="3">
-                                    <p:outputLabel value="Produto"/>
-                                    <p:selectOneMenu value="#{controleConsulta.objeto.itens}"
-                                                     id="selectProduto">
-                                        <f:converter converterId="converterProduto"/>
-                                        <f:selectItems value="#{controleConsulta.daoItem.listAll}"
-                                                       var="p" itemLabel="#{p.nome}"/>
-                                    </p:selectOneMenu>
-                                    <p:commandButton 
-                                        actionListener="#{controleConsulta.objeto.adicionarItem}" update="listaDesejos :formListagem:growl" 
-                                        icon="ui-icon-plus" id="btnNovoDesejo"
-                                        process="btnNovoItem selectProduto"/>
-                                </p:panelGrid>    
-                            </div>                            
-                            <p:dataTable value="#{controleConsulta.objeto.itens}" var="item" 
-                                         id="listaDeItens">
-                                <p:column headerText="Produto">
-                                    <p:outputLabel value="#{item.nome}"/>                                    
-                                </p:column>
-                                <p:column headerText="Descrição">
-                                    <p:outputLabel value="#{item.descricao}"/>                                    
-                                </p:column>    
-                                <p:column headerText="Preço">
-                                    <p:outputLabel value="#{item.preco}"/>                                    
-                                </p:column>    
-                                <p:column headerText="Ações">
-                                    <div align="center">
-                                        <p:commandButton icon="ui-icon-trash"
-                                                         actionListener="#{controleConsulta.objeto.removeItem(obj)}"
-                                                         process="btnRemoverItem" id="btnRemoverItem"
-                                                         update="listaItens :formListagem:growl"/>
-                                    </div>
-                                </p:column>                            
-                            </p:dataTable>
-                        </p:tab>-->
+                        
+                         <p:tab title="Itens" titletip="Itens">
+<!--                        <div align="center">
+                            <p:panelGrid columns="3">
+                                <p:outputLabel value="Produto"/>
+                                <p:selectOneMenu value="#{controlePessoaFisica.produto}"
+                                                 id="selectProduto">
+                                    <f:converter converterId="converterProduto"/>
+                                    <f:selectItems value="#{controlePessoaFisica.daoProduto.listarTodos}"
+                                                   var="p" itemLabel="#{p.nome}"/>
+                                </p:selectOneMenu>
+                                <p:commandButton 
+                                    actionListener="#{controlePessoaFisica.adicionarDesejo()}"
+                                    update="listaDesejos :formListagem:growl" 
+                                    icon="ui-icon-plus" id="btnNovoDesejo"
+                                    process="btnNovoDesejo selectProduto"/>
+                            </p:panelGrid>    
+                        </div>                            
+                        <p:dataTable value="#{controlePessoaFisica.objeto.desejos}" var="des" 
+                                     id="listaDesejos">
+                            <p:column headerText="Produto">
+                                <p:outputLabel value="#{des.nome}"/>                                    
+                            </p:column>
+                            <p:column headerText="Marca">
+                                <p:outputLabel value="#{des.marca.nome}"/>                                    
+                            </p:column>    
+                            <p:column headerText="Ações">
+                                <div align="center">
+                                    <p:commandButton icon="ui-icon-trash"
+                                                     actionListener="#{controlePessoaFisica.removerDesejo(des)}"
+                                                     process="btnRemoverDesejo" id="btnRemoverDesejo"
+                                                     update="listaDesejos :formListagem:growl"/>
+                                </div>
+                            </p:column>                            
+                        </p:dataTable>-->
+                    </p:tab>
                     </p:tabView>
                 </h:form>
+
             </div>
         </ui:define>
     </ui:composition>

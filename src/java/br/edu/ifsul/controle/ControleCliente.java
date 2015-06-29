@@ -1,11 +1,11 @@
-package br.ifsul.edu.controle;
+package br.edu.ifsul.controle;
 
 import br.edu.ifsul.modelo.Cliente;
 import br.edu.ifsul.modelo.Item;
-import br.ifsul.edu.dao.CidadeDAO;
-import br.ifsul.edu.dao.ClienteDAO;
-import br.ifsul.edu.dao.GenericDAO;
-import br.ifsul.edu.util.Util;
+import br.edu.ifsul.dao.CidadeDAO;
+import br.edu.ifsul.dao.ClienteDAO;
+import br.edu.ifsul.dao.GenericDAO;
+import br.edu.ifsul.util.Util;
 
 import java.io.Serializable;
 import javax.ejb.EJB;

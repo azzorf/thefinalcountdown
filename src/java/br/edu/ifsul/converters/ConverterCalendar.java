@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ifsul.edu.converters;
+package br.edu.ifsul.converters;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

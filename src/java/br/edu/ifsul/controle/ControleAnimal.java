@@ -1,40 +1,41 @@
-package br.ifsul.edu.controle;
+package br.edu.ifsul.controle;
 
-import br.edu.ifsul.modelo.Item;
-import br.ifsul.edu.dao.GenericDAO;
-import br.ifsul.edu.dao.ItemDAO;
-import br.ifsul.edu.util.Util;
+import br.edu.ifsul.modelo.Animal;
+import br.edu.ifsul.dao.AnimalDAO;
+import br.edu.ifsul.dao.GenericDAO;
+import br.edu.ifsul.util.Util;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-@ManagedBean(name = "controleItem")
+@ManagedBean(name = "controleAnimal")
 @ViewScoped
-public class ControleItem implements Serializable {
+public class ControleAnimal implements Serializable {
 
     @EJB
-    private ItemDAO<Item> dao;
-    private Item objeto;
+    private AnimalDAO<Animal> dao;
+    private Animal objeto;
+
 
     public GenericDAO getDao() {
         return dao;
     }
 
-    public void setDao(ItemDAO dao) {
+    public void setDao(AnimalDAO dao) {
         this.dao = dao;
     }
 
-    public ControleItem() {
+    public ControleAnimal() {
     }
 
     public String listar() {
-        return "/privado/item/listar?faces-redirect=true";
+        return "/privado/animal/listar?faces-redirect=true";
     }
 
     public void novo() {
-        objeto = new Item();
+        objeto = new Animal();
     }
 
     public void salvar() {
@@ -69,11 +70,11 @@ public class ControleItem implements Serializable {
         }
     }
 
-    public Item getObjeto() {
+    public Animal getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Item objeto) {
+    public void setObjeto(Animal objeto) {
         this.objeto = objeto;
     }
 
