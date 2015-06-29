@@ -2,6 +2,7 @@ package br.edu.ifsul.controle;
 
 import br.edu.ifsul.modelo.Animal;
 import br.edu.ifsul.dao.AnimalDAO;
+import br.edu.ifsul.dao.ClienteDAO;
 import br.edu.ifsul.dao.GenericDAO;
 import br.edu.ifsul.util.Util;
 
@@ -17,6 +18,9 @@ public class ControleAnimal implements Serializable {
     @EJB
     private AnimalDAO<Animal> dao;
     private Animal objeto;
+    
+    @EJB
+    private ClienteDAO daoCliente;
 
 
     public GenericDAO getDao() {
@@ -76,6 +80,14 @@ public class ControleAnimal implements Serializable {
 
     public void setObjeto(Animal objeto) {
         this.objeto = objeto;
+    }
+
+    public ClienteDAO getDaoCliente() {
+        return daoCliente;
+    }
+
+    public void setDaoCliente(ClienteDAO daoCliente) {
+        this.daoCliente = daoCliente;
     }
 
 }

@@ -88,15 +88,18 @@
                         </p:column>
                     </p:dataTable>
                 </h:form>
+            </div>
+        </ui:define>
+        <ui:define name="dialogos">
+            <p:dialog header="Edição" widgetVar="dlg" resizable="false" modal="true" >
                 <h:form id="formEdicao">
                     <p:tabView id="tab" effect="scale" effectDuration="normal">
                         <p:tab title="Dados Principais" titletip="Dados Principais">
-                            <p:messages/>
                             <p:growl/>
                             <p:panelGrid columns="2">
                                 <f:facet name="footer">
                                     <div align="center">
-                                        <p:commandButton value="Salvar" update=":formListagem :formEdicao" 
+                                        <p:commandButton value="Salvar" update=":formListagem:tabela :formEdicao" 
                                                          actionListener="#{controleConsulta.salvar()}" 
                                                          oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
                                                          icon="ui-icon-disk"/>
@@ -139,46 +142,10 @@
                             </p:panelGrid>
                         </p:tab>
 
-<!--                        <p:tab title="Itens" titletip="Itens">
-                            <div align="center">
-                                <p:panelGrid columns="3">
-                                    <p:outputLabel value="Produto"/>
-                                    <p:selectOneMenu value="#{controleConsulta.objeto.itens}"
-                                                     id="selectProduto">
-                                        <f:converter converterId="converterProduto"/>
-                                        <f:selectItems value="#{controleConsulta.daoItem.listAll}"
-                                                       var="p" itemLabel="#{p.nome}"/>
-                                    </p:selectOneMenu>
-                                    <p:commandButton 
-                                        actionListener="#{controleConsulta.objeto.adicionarItem}" update="listaDesejos :formListagem:growl" 
-                                        icon="ui-icon-plus" id="btnNovoDesejo"
-                                        process="btnNovoItem selectProduto"/>
-                                </p:panelGrid>    
-                            </div>                            
-                            <p:dataTable value="#{controleConsulta.objeto.itens}" var="item" 
-                                         id="listaDeItens">
-                                <p:column headerText="Produto">
-                                    <p:outputLabel value="#{item.nome}"/>                                    
-                                </p:column>
-                                <p:column headerText="Descrição">
-                                    <p:outputLabel value="#{item.descricao}"/>                                    
-                                </p:column>    
-                                <p:column headerText="Preço">
-                                    <p:outputLabel value="#{item.preco}"/>                                    
-                                </p:column>    
-                                <p:column headerText="Ações">
-                                    <div align="center">
-                                        <p:commandButton icon="ui-icon-trash"
-                                                         actionListener="#{controleConsulta.objeto.removeItem(obj)}"
-                                                         process="btnRemoverItem" id="btnRemoverItem"
-                                                         update="listaItens :formListagem:growl"/>
-                                    </div>
-                                </p:column>                            
-                            </p:dataTable>
-                        </p:tab>-->
+
                     </p:tabView>
                 </h:form>
-            </div>
+            </p:dialog> 
         </ui:define>
     </ui:composition>
 </html>

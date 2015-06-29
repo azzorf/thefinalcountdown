@@ -9,6 +9,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -27,6 +28,7 @@ public class Cliente extends Pessoa implements Serializable {
     private Calendar cadastro;
    
     public Cliente() {
+        this.cadastro = Calendar.getInstance();
     }
 
     public String getCpf() {
@@ -44,5 +46,10 @@ public class Cliente extends Pessoa implements Serializable {
     public void setCadastro(Calendar cadastro) {
         this.cadastro = cadastro;
     }   
-
+    
+    
+    @Transient
+    public String getDataCadastroString(){
+    return "0";
+    }
 }

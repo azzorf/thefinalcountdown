@@ -95,47 +95,48 @@
                         </p:column>
                     </p:dataTable>
                 </h:form>
-                <h:form id="formEdicao">
-                    <p:dialog header="Edição" widgetVar="dlg" resizable="false" >
-                        <p:messages/>
-                        <p:growl/>
-                        <p:panelGrid columns="2">
-                            <f:facet name="footer">
-                                <div align="center">
-                                    <p:commandButton value="Salvar" update=":formListagem :formEdicao" 
-                                                     actionListener="#{controleAnimal.salvar()}" 
-                                                     oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
-                                                     icon="ui-icon-disk"/>
-
-                                </div>
-                            </f:facet>
-                            <p:outputLabel value="ID" for="txtId"/>
-                            <p:inputText value="#{controleAnimal.objeto.id}" id="txtId" size="10" maxlength="10" readonly="true"/>
-
-                            <p:outputLabel value="Nome" for="txtNome"/>
-                            <p:inputText value="#{controleAnimal.objeto.nome}" id="txtNome" size="50" maxlength="50"/>
-
-                            <p:outputLabel value="Raça" for="txtRaca"/>
-                            <p:inputText value="#{controleAnimal.objeto.raca}" id="txtRaca" size="50" maxlength="50"/>
-
-                            <p:outputLabel value="Peso" for="txtPeso"/>
-                            <p:inputText value="#{controleAnimal.objeto.peso}" id="txtPeso" size="5" maxlength="5"/>
-
-                            <p:outputLabel value="Nascimento" for="txtNascimento"/>
-                            <p:calendar value="#{controleAnimal.objeto.nascimento}" id="txtNascimento" pattern="dd/MM/yyyy" mask="true">
-                                <f:converter converterId="converterCalendar"/>
-                            </p:calendar>
-
-                            <p:outputLabel value="Cliente" for="txtCliente"/>
-                            <p:selectOneMenu value="#{controleAnimal.objeto.cliente}" id="txtCliente">
-                                <f:converter converterId="converterCidade"/>
-                                <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
-                                <f:selectItems value="#{controleCliente.daoCidade.listAll}" var="c" itemLabel="#{c.nome}"/>
-                            </p:selectOneMenu>
-                        </p:panelGrid>
-                    </p:dialog>
-                </h:form>
             </div>
+        </ui:define>
+        <ui:define name="dialogos">
+            <p:dialog header="Edição" widgetVar="dlg" resizable="false" modal="true">
+                <h:form id="formEdicao">
+                    <p:growl/>
+                    <p:panelGrid columns="2">
+                        <f:facet name="footer">
+                            <div align="center">
+                                <p:commandButton value="Salvar" update=":formListagem:tabela :formEdicao" 
+                                                 actionListener="#{controleAnimal.salvar()}" 
+                                                 oncomplete="if(!args.validationFailed){PF('dlg').hide();}"
+                                                 icon="ui-icon-disk"/>
+
+                            </div>
+                        </f:facet>
+                        <p:outputLabel value="ID" for="txtId"/>
+                        <p:inputText value="#{controleAnimal.objeto.id}" id="txtId" size="10" maxlength="10" readonly="true"/>
+
+                        <p:outputLabel value="Nome" for="txtNome"/>
+                        <p:inputText value="#{controleAnimal.objeto.nome}" id="txtNome" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="Raça" for="txtRaca"/>
+                        <p:inputText value="#{controleAnimal.objeto.raca}" id="txtRaca" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="Peso" for="txtPeso"/>
+                        <p:inputText value="#{controleAnimal.objeto.peso}" id="txtPeso" size="5" maxlength="5"/>
+
+                        <p:outputLabel value="Nascimento" for="txtNascimento"/>
+                        <p:calendar value="#{controleAnimal.objeto.nascimento}" id="txtNascimento" pattern="dd/MM/yyyy" mask="true">
+                            <f:converter converterId="converterCalendar"/>
+                        </p:calendar>
+
+                        <p:outputLabel value="Cliente" for="txtCliente"/>
+                        <p:selectOneMenu value="#{controleAnimal.objeto.cliente}" id="txtCliente">
+                            <f:converter converterId="converterCliente"/>
+                            <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
+                            <f:selectItems value="#{controleAnimal.daoCliente.listAll}" var="c" itemLabel="#{c.nome}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
         </ui:define>
     </ui:composition>
 </html>

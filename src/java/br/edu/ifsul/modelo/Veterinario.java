@@ -88,6 +88,7 @@ public class Veterinario extends Pessoa implements Serializable {
     }
 
     public void adicionarAcesso(AcessoUsuario obj) {
+        obj.setUsuario(this);
         AcessoUsuario.add(obj);
     }
 
