@@ -6,6 +6,7 @@ import br.edu.ifsul.dao.ConsultaDAO;
 import br.edu.ifsul.dao.GenericDAO;
 import br.edu.ifsul.dao.ItemDAO;
 import br.edu.ifsul.dao.VeterinarioDAO;
+import br.edu.ifsul.modelo.Item;
 import br.edu.ifsul.util.Util;
 
 import java.io.Serializable;
@@ -19,16 +20,17 @@ public class ControleConsulta implements Serializable {
 
     @EJB
     private AnimalDAO daoAnimal;
-    
+
     @EJB
     private VeterinarioDAO daoVeterinario;
-    
+
     @EJB
     private ItemDAO daoItem;
-    
+
     @EJB
     private ConsultaDAO<Consulta> dao;
     private Consulta objeto;
+    private Item item;
 
     public GenericDAO getDao() {
         return dao;
@@ -53,8 +55,10 @@ public class ControleConsulta implements Serializable {
         try {
 
             if (objeto.getId() == null) {
+                objeto.setValorTotal(this.valorTotalItens());
                 dao.persist(objeto);
             } else {
+                objeto.setValorTotal(this.valorTotalItens());
                 dao.merge(objeto);
             }
             Util.msgInformacao("Objeto persistido com sucesso.");
@@ -113,7 +117,30 @@ public class ControleConsulta implements Serializable {
         this.daoItem = daoItem;
     }
 
-  
+    public Double valorTotalItens() {
+        Double acum = 0.0;
+        for (Item e : objeto.getItens())acum += e.getPreco();
+        return acum;
+    }
+    
+    
+      public void adicionarItem(){
+        objeto.addItem(item);
+        Util.msgInformacao("Item adicionado com sucesso");
+    }
+    
+    public void removerItem(Item obj){
+        objeto.removeItem(obj);
+        Util.msgInformacao("Desejo removido com sucesso");
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
     
     
 

@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -106,6 +107,7 @@ public class Consulta implements Serializable {
     }
 
     public Consulta() {
+        this.valorTotal = 0.0;
     }
 
     public Veterinario getVeterinario() {
@@ -165,4 +167,6 @@ public class Consulta implements Serializable {
     public void setItens(List<Item> itens) {
         this.itens = itens;
     }
+    
+   
 }

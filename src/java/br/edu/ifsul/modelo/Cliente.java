@@ -1,6 +1,8 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,13 +24,14 @@ public class Cliente extends Pessoa implements Serializable {
     @NotNull(message = "O CPF deve ser informado")
     @Column(name = "cpf", nullable = false)
     private String cpf;
-    
+
     @Temporal(TemporalType.DATE)
-    @Column(name = "cadastro", nullable = true)
+    @Column(name = "cadastro", nullable = false)
     private Calendar cadastro;
-   
+
     public Cliente() {
         this.cadastro = Calendar.getInstance();
+
     }
 
     public String getCpf() {
@@ -45,11 +48,11 @@ public class Cliente extends Pessoa implements Serializable {
 
     public void setCadastro(Calendar cadastro) {
         this.cadastro = cadastro;
-    }   
-    
-    
+    }
+
     @Transient
-    public String getDataCadastroString(){
-    return "0";
+    public String getDataCadastroString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(cadastro.getTime());
     }
 }

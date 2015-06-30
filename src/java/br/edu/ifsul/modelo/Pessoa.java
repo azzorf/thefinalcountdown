@@ -33,7 +33,7 @@ public abstract class Pessoa implements Serializable {
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
     @NotNull(message = "O telefone deve ser informado.")
-    @Column(name = "telefone", length = 11, nullable = false)
+    @Column(name = "telefone", length = 13, nullable = false)
     private String telefone;
     @NotNull(message = "O RG deve ser informado.")
     @Column(name = "rg", length = 10, nullable = false)

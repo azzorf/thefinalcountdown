@@ -81,7 +81,7 @@
                                                  icon="ui-icon-pencil"/>
                                 <p:commandButton update=":formListagem" 
                                                  actionListener="#{controleConsulta.remover(obj.id)}" 
-                                                 onclick="if (!confirm('Confirma a exclusão do estado #{obj.nome}?'))
+                                                 onclick="if (!confirm('Confirma a exclusão do estado #{obj.animal.nome}?'))
                                                              return false"
                                                  icon="ui-icon-trash"/>
                             </div>
@@ -136,13 +136,43 @@
                                     <f:converter converterId="converterCalendar"/>
                                 </p:calendar>
 
-
                                 <p:outputLabel value="Valor Total" for="txtValor"/>
                                 <p:inputText value="#{controleConsulta.objeto.valorTotal}" id="txtValor" size="10" maxlength="10" readonly="true"/>
                             </p:panelGrid>
                         </p:tab>
-
-
+                        <p:tab title="Itens" titletip="Itens">
+                            <div align="center">
+                                <p:panelGrid columns="3">
+                                    <p:outputLabel value="Item"/>
+                                    <p:selectOneMenu value="#{controleConsulta.item}" id="selectItem">
+                                        <f:converter converterId="converterItem"/>
+                                        <f:selectItems value="#{controleConsulta.daoItem.listAll}" var="p" itemLabel="#{p.nome}"/>
+                                   </p:selectOneMenu>
+                                    <p:commandButton 
+                                        actionListener="#{controleConsulta.adicionarItem()}"
+                                        update="" 
+                                        icon="ui-icon-plus" id="btnNovoItem"
+                                        process="btnNovoItem selectItem"/>
+                                </p:panelGrid>    
+                            </div>                            
+<!--                            <p:dataTable value="#{controlePessoaFisica.objeto.desejos}" var="des" 
+                                         id="listaDesejos">
+                                <p:column headerText="Produto">
+                                    <p:outputLabel value="#{des.nome}"/>                                    
+                                </p:column>
+                                <p:column headerText="Marca">
+                                    <p:outputLabel value="#{des.marca.nome}"/>                                    
+                                </p:column>    
+                                <p:column headerText="Ações">
+                                    <div align="center">
+                                        <p:commandButton icon="ui-icon-trash"
+                                                         actionListener="#{controlePessoaFisica.removerDesejo(des)}"
+                                                         process="btnRemoverDesejo" id="btnRemoverDesejo"
+                                                         update="listaDesejos :formListagem:growl"/>
+                                    </div>
+                                </p:column>                            
+                            </p:dataTable>-->
+                        </p:tab>
                     </p:tabView>
                 </h:form>
             </p:dialog> 

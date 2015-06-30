@@ -53,7 +53,7 @@ public class TesteVeterinario {
             obj.setTelefone("5499274219");
             obj.setPassword("swordfish");
             obj.setEspecialidade("Caninos");
-            obj.setCidade(em.find(Cidade.class, 1));
+            obj.setCidade(em.find(Cidade.class, 34));
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

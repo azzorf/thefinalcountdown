@@ -8,7 +8,6 @@ import br.edu.ifsul.dao.GenericDAO;
 import br.edu.ifsul.util.Util;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
