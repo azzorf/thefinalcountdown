@@ -62,7 +62,7 @@ public class Consulta implements Serializable {
     @JoinColumn(name = "animal", referencedColumnName = "id", nullable = false)
     @NotNull(message = "Um animal deve ser informado.")
     private Animal animal;
-    
+
     @NotEmpty(message = "A Descricao deve ser informado")
     @Length(max = 500, min = 3, message = "A Descricao deve ter no minimo {min} e no maximo {max}  caracteres")
     @Column(name = "descricao", nullable = true, length = 500, columnDefinition = "text")
@@ -77,7 +77,9 @@ public class Consulta implements Serializable {
     }
 
     public Double getValorTotal() {
-        return valorTotal;
+        Double acum = 0.0;
+        for (Item e : getItens())acum += e.getPreco();
+        return acum;
     }
 
     public void setValorTotal(Double valorTotal) {
@@ -138,13 +140,11 @@ public class Consulta implements Serializable {
         return itens;
     }
 
-     public void addItem(Item obj){
-        if (!this.getItens().contains(obj)){
-            this.getItens().add(obj);
-        }
+    public void addItem(Item obj) {
+        this.getItens().add(obj);
     }
-    
-    public void removeItem(Item obj){
+
+    public void removeItem(Item obj) {
         this.getItens().remove(obj);
     }
 
@@ -168,5 +168,4 @@ public class Consulta implements Serializable {
         this.itens = itens;
     }
     
-   
 }

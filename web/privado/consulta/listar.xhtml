@@ -95,7 +95,7 @@
                 <h:form id="formEdicao">
                     <p:tabView id="tab" effect="scale" effectDuration="normal">
                         <p:tab title="Dados Principais" titletip="Dados Principais">
-                            <p:growl/>
+                            <p:growl id="growlFormEdicao"/>
                             <p:panelGrid columns="2">
                                 <f:facet name="footer">
                                     <div align="center">
@@ -147,31 +147,32 @@
                                     <p:selectOneMenu value="#{controleConsulta.item}" id="selectItem">
                                         <f:converter converterId="converterItem"/>
                                         <f:selectItems value="#{controleConsulta.daoItem.listAll}" var="p" itemLabel="#{p.nome}"/>
-                                   </p:selectOneMenu>
+                                    </p:selectOneMenu>
                                     <p:commandButton 
                                         actionListener="#{controleConsulta.adicionarItem()}"
-                                        update="" 
+                                        update="listaItens growlFormEdicao" 
                                         icon="ui-icon-plus" id="btnNovoItem"
                                         process="btnNovoItem selectItem"/>
                                 </p:panelGrid>    
                             </div>                            
-<!--                            <p:dataTable value="#{controlePessoaFisica.objeto.desejos}" var="des" 
-                                         id="listaDesejos">
+                            <p:dataTable value="#{controleConsulta.objeto.itens}" var="itens" id="listaItens">
                                 <p:column headerText="Produto">
-                                    <p:outputLabel value="#{des.nome}"/>                                    
+                                    <p:outputLabel value="#{itens.nome}"/>                                    
                                 </p:column>
-                                <p:column headerText="Marca">
-                                    <p:outputLabel value="#{des.marca.nome}"/>                                    
-                                </p:column>    
+                                <p:column headerText="Preço">
+                                    <p:outputLabel value="#{itens.preco}">
+                                        <f:convertNumber pattern="R$ 0.00"/>
+                                    </p:outputLabel>
+                                </p:column>  
                                 <p:column headerText="Ações">
                                     <div align="center">
                                         <p:commandButton icon="ui-icon-trash"
-                                                         actionListener="#{controlePessoaFisica.removerDesejo(des)}"
-                                                         process="btnRemoverDesejo" id="btnRemoverDesejo"
-                                                         update="listaDesejos :formListagem:growl"/>
+                                                         actionListener="#{controleConsulta.removerItem(itens)}"
+                                                         process="btnRemoverItem" id="btnRemoverItem"
+                                                         update="listaItens "/>
                                     </div>
                                 </p:column>                            
-                            </p:dataTable>-->
+                            </p:dataTable>
                         </p:tab>
                     </p:tabView>
                 </h:form>

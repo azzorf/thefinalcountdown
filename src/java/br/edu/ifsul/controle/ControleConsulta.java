@@ -55,10 +55,8 @@ public class ControleConsulta implements Serializable {
         try {
 
             if (objeto.getId() == null) {
-                objeto.setValorTotal(this.valorTotalItens());
                 dao.persist(objeto);
             } else {
-                objeto.setValorTotal(this.valorTotalItens());
                 dao.merge(objeto);
             }
             Util.msgInformacao("Objeto persistido com sucesso.");
@@ -117,19 +115,12 @@ public class ControleConsulta implements Serializable {
         this.daoItem = daoItem;
     }
 
-    public Double valorTotalItens() {
-        Double acum = 0.0;
-        for (Item e : objeto.getItens())acum += e.getPreco();
-        return acum;
-    }
-    
-    
-      public void adicionarItem(){
+    public void adicionarItem() {
         objeto.addItem(item);
         Util.msgInformacao("Item adicionado com sucesso");
     }
-    
-    public void removerItem(Item obj){
+
+    public void removerItem(Item obj) {
         objeto.removeItem(obj);
         Util.msgInformacao("Desejo removido com sucesso");
     }
@@ -141,7 +132,5 @@ public class ControleConsulta implements Serializable {
     public void setItem(Item item) {
         this.item = item;
     }
-    
-    
 
 }
