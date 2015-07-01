@@ -91,9 +91,9 @@
             </div>
         </ui:define>
         <ui:define name="dialogos">
-            <p:dialog header="Edição" widgetVar="dlg" resizable="false" modal="true" >
+            <p:dialog header="Edição" widgetVar="dlg" resizable="false" modal="true" width="750">
                 <h:form id="formEdicao">
-                    <p:tabView id="tab" effect="scale" effectDuration="normal">
+                    <p:tabView id="tab">
                         <p:tab title="Dados Principais" titletip="Dados Principais">
                             <p:growl id="growlFormEdicao"/>
                             <p:panelGrid columns="2">
@@ -152,7 +152,7 @@
                                         actionListener="#{controleConsulta.adicionarItem()}"
                                         update="listaItens growlFormEdicao" 
                                         icon="ui-icon-plus" id="btnNovoItem"
-                                        process="btnNovoItem selectItem"/>
+                                        process="btnNovoItem selectItem :formEdicao:tab:txtValor"/>
                                 </p:panelGrid>    
                             </div>                            
                             <p:dataTable value="#{controleConsulta.objeto.itens}" var="itens" id="listaItens">
@@ -169,7 +169,8 @@
                                         <p:commandButton icon="ui-icon-trash"
                                                          actionListener="#{controleConsulta.removerItem(itens)}"
                                                          process="btnRemoverItem" id="btnRemoverItem"
-                                                         update="listaItens "/>
+                                                         update="listaItens :formEdicao:tab:growlFormEdicao
+                                                         :formEdicao:tab:txtValor"/>
                                     </div>
                                 </p:column>                            
                             </p:dataTable>
@@ -180,4 +181,3 @@
         </ui:define>
     </ui:composition>
 </html>
-

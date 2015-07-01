@@ -18,7 +18,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -65,7 +64,7 @@ public class Consulta implements Serializable {
 
     @NotEmpty(message = "A Descricao deve ser informado")
     @Length(max = 500, min = 3, message = "A Descricao deve ter no minimo {min} e no maximo {max}  caracteres")
-    @Column(name = "descricao", nullable = true, length = 500, columnDefinition = "text")
+    @Column(name = "descricao", nullable = true, columnDefinition = "text")
     private String descricao;
 
     public Integer getId() {

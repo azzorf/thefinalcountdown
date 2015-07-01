@@ -68,7 +68,7 @@
                             <p:outputLabel value="#{obj.nome}"/>
                         </p:column>
                         <p:column headerText="Descrição">
-                            <p:outputLabel value="#{obj.descricao}"/>
+                            <p:outputLabel value="#{obj.descricao}" escape="false"/>
                         </p:column>
                         <p:column headerText="Estoque">
                             <p:outputLabel value="#{obj.estoque}"/>
@@ -123,7 +123,7 @@
                         <p:inputText value="#{controleItem.objeto.estoque}" id="txtEstoque" size="3" maxlength="3"/>
 
                         <p:outputLabel value="Preço" for="txtPreco"/>
-                        <p:inputText value="#{controleItem.objeto.preco}" id="txtPreco" size="14" maxlength="14"/>
+                        <p:inputText value="#{controleItem.objeto.preco}" onkeydown="Mascara(this, Valor)" id="txtPreco" size="14" maxlength="14"/>
                     </p:panelGrid>
                 </h:form>
             </p:dialog>
